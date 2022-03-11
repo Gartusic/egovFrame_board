@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="BoardSpace">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/> <!--  <- 이부분은 항상 고정이다. -->
+	<typeAlias  alias="boardVO" type="egovframework.example.sample.service.BoardVO"/>
+
+<!-- 여기에서 ibatis를 이용한 쿼리문 처리를 할 수 있다. 
+	경로 설정은 sql-map-config.xml에서 처리한다.  -->
+	
+	
+	<!-- 게시물 저장 -->
+	<insert id="boardDAO.insertNBoard">
+		<![CDATA[
+			INSERT INTO NBOARD 
+				( 
+				   TITLE
+				  , PASS
+				  , NAME
+				  , CONTENT
+				  , HITS
+				  , RDATE )
+			VALUES ( 
+				   #title#
+				  , #pass#
+				  , #name#
+				  , #content#
+				  , 0
+				  , sysdate )
+		]]>
+	</insert>
+	
+	<!-- 게시물 조회 -->
+	<!-- List > HashMap (난이도가...) -->
+	<select id="boardDAO.selectNBoard" resultClass="egovMap">
+		SELECT  UNQ,
+				TITLE,
+				PASS,
+				NAME,
+				CONTENT,
+				HITS,
+				to_char(RDATE, 'yyyy-mm-dd') as rdate
+		FROM
+				NBOARD
+		ORDER BY
+				UNQ DESC
+	</select>
+</sqlMap>
