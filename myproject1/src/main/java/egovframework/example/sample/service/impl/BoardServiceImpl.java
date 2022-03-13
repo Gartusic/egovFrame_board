@@ -28,4 +28,14 @@ public class BoardServiceImpl implements BoardService{
 		return boardDAO.selectNBoardList(vo);
 	}
 
+	@Override
+	public void deleteNBoard(BoardVO vo) throws Exception {
+		boardDAO.deleteNBoard(vo);
+	}
+
+	@Override
+	public String selectNBoardDetail(BoardVO vo) throws Exception {
+		return boardDAO.selectNBoardDetail(vo);
+	}
+
 }

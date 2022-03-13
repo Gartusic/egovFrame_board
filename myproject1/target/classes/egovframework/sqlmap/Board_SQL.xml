@@ -46,4 +46,25 @@
 		ORDER BY
 				UNQ DESC
 	</select>
+	
+	<select id="boardDAO.selectNBoardDetail">
+		SELECT  UNQ,
+				TITLE,
+				PASS,
+				NAME,
+				CONTENT,
+				HITS,
+				to_char(RDATE, 'yyyy-mm-dd') as rdate
+		FROM
+				NBOARD
+		WHERE
+				UNQ = #unq#
+	</select>
+	
+	<!-- 게시물 삭제 -->
+	<delete id="boardDAO.deleteNBoard">
+		DELETE 
+		FROM NBOARD
+		WHERE UNQ = #unq#
+	</delete>
 </sqlMap>

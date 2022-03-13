@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import egovframework.example.sample.service.BoardService;
 import egovframework.example.sample.service.BoardVO;
-
 @Controller
 public class BoardController {
 	
@@ -36,6 +35,7 @@ public class BoardController {
 		return msg;
 	}
 	
+//	게시글 목록 화면
 	@RequestMapping("/boardList.do")
 	public String selectNBoardList(BoardVO vo, ModelMap model) throws Exception{
 		List<?> list = boardService.selectNBoardList(vo);
@@ -45,5 +45,23 @@ public class BoardController {
 		model.addAttribute("resultList", list);
 		return "board/boardList";
 	}
+	
+//	게시글 상세화면
+	@RequestMapping("/boardDetail.do")
+	public String selectNBoardDetail(BoardVO vo) throws Exception{
+		String bd = boardService.selectNBoardDetail(vo);
+		System.out.println("bd :" + bd);
+		return "board/boardDetail";
+	}
+	
+	
+	
+//	게시글 삭제
+	@RequestMapping("/boardDelete.do")
+	public String deleteSample(BoardVO vo) throws Exception {
+		boardService.deleteNBoard(vo);
+		return "forward:/boardList";
+	}
+	
 	
 }

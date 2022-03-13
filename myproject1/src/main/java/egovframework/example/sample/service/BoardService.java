@@ -10,4 +10,8 @@ public interface BoardService {
 //	화면 목록
 	public List<?> selectNBoardList(BoardVO vo) throws Exception;
 	
+//	게시글 삭제
+	public void deleteNBoard(BoardVO vo) throws Exception;
+
+	public String selectNBoardDetail(BoardVO vo) throws Exception;
 }

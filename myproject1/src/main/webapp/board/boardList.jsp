@@ -24,19 +24,24 @@
 		</tr>
 		<c:set var="cnt" value="1" />
 		<c:forEach var="result" items="${resultList }">
-			<a href="#">
-				<tr>	
+			<form action="boardDetail.do" method="post">
+				<tr>
 					<td><c:out value="${cnt }" /></td>
 					<td><c:out value="${result.title }" /></td>
 					<td><c:out value="${result.name }" /></td>
 					<td><c:out value="${result.rdate }" /></td>
 					<td><c:out value="${result.hits }" /></td>
 				</tr>
-			</a>
+				<button type="submit">보기</button>
+			</form>
 			<c:set var="cnt" value="${cnt+1}"/>
 		</c:forEach>
 	
 	</table>
-
+	<div>
+		<form action="boardWrite.do" method="get">
+			<button type="submit">글쓰기</button>
+		</form>
+	</div>
 </body>
 </html>
