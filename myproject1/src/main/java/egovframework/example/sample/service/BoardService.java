@@ -10,8 +10,16 @@ public interface BoardService {
 //	화면 목록
 	public List<?> selectNBoardList(BoardVO vo) throws Exception;
 	
+//	비밀번호 확인
+	public int selectNBoardPass(BoardVO vo) throws Exception;
+	
 //	게시글 삭제
-	public void deleteNBoard(BoardVO vo) throws Exception;
+	public int deleteBoard(BoardVO vo) throws Exception;
 
-	public String selectNBoardDetail(BoardVO vo) throws Exception;
+//	상세화면
+	public BoardVO selectNBoardDetail(int unq) throws Exception;
+	
+//	게시글 수정
+	public int updateNBoard(BoardVO vo) throws Exception;
+	
 }

@@ -6,8 +6,11 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import egovframework.example.sample.service.BoardService;
 import egovframework.example.sample.service.BoardVO;
@@ -48,20 +51,62 @@ public class BoardController {
 	
 //	게시글 상세화면
 	@RequestMapping("/boardDetail.do")
-	public String selectNBoardDetail(BoardVO vo) throws Exception{
-		String bd = boardService.selectNBoardDetail(vo);
-		System.out.println("bd :" + bd);
+	public String selectNBoardDetail(BoardVO vo, ModelMap model) throws Exception{
+		BoardVO boardVO = boardService.selectNBoardDetail(vo.getUnq());
+		
+		String content = boardVO.getContent(); // \n
+		boardVO.setContent(content.replace("\n", "<br>")); // 줄바꿈 되게 하는 코드
+		
+		model.addAttribute("boardDetail", boardVO);
+		System.out.println("unq:" + vo.getUnq());
 		return "board/boardDetail";
 	}
 	
 	
+//	비밀번호 확인
+	@RequestMapping("/passWrite.do")
+	public String selectNBoardPass(int unq, ModelMap model) {
+		model.addAttribute("unq", unq);
+		return "board/passWrite";
+	}
 	
 //	게시글 삭제
 	@RequestMapping("/boardDelete.do")
-	public String deleteSample(BoardVO vo) throws Exception {
-		boardService.deleteNBoard(vo);
-		return "forward:/boardList";
+	@ResponseBody // 자바 객체 <-> http응답 바디로 변환하는 역할
+	public String deleteBoard(BoardVO vo) throws Exception {
+		
+//		암호일치검사 1= true, 0 = false
+		
+		int result = 0;
+		int count = boardService.selectNBoardPass(vo);
+		if(count == 1) {
+			result = boardService.deleteBoard(vo);
+		} else if(count ==0) {
+			result = -1;
+		}
+
+		return result+"";
 	}
 	
+	
+	
+	
+//	수정화면으로 이동
+	@RequestMapping("boardModifyWrite.do")
+	public String selectNBoardModifyWrite(BoardVO vo, ModelMap model)
+											throws Exception{
+		BoardVO boardVO = boardService.selectNBoardDetail(vo.getUnq());
+		model.addAttribute("BoardVO", boardVO);
+		return "board/boardModifyWrite";
+	}
+//	글 수정
+	@RequestMapping("boardModifySave.do")
+	@ResponseBody //비동기 연결방식
+	public String updateNBoardModify(BoardVO vo) throws Exception{
+		int result = boardService.updateNBoard(vo);
+		
+		
+		return result+"";
+	}
 	
 }

@@ -1,45 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c"      uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<script
-  src="https://code.jquery.com/jquery-1.12.4.js"
-  integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
-  crossorigin="anonymous"></script>
-  <script
-  src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
-  integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
-  crossorigin="anonymous"></script>
+<title>글 수정</title>
 </head>
-
-<style>
-body{
-	font-size:9px;
-}
-button{
-	font-size:9px;
-}
-table{
-	width:600px;
-	border-collapse:collapse;
-}
-th,td{
-	border:1px solid #cccccc;
-}
-.input1{
-	width:98%;
-}
-</style>
 
 <script>
 /* trim() : 공백제거 */
-	function fn_submit(){
+	function up_submit(){
 		if($.trim($("#title").val()) == ""){
 			alert("제목을 입력해주세요. ");
-			$("#title").focus();
+			$("#title").focus(); // 커서를 집중시킴
 			return false;
 		}
 		
@@ -68,20 +42,20 @@ th,td{
 	
 
 	/* 비동기 전송방식 */
-		var formData = $("#frm").serialize(); // #frm 안에 있는 내용을 갖고 오는 함수
+		var formData = $("#ufrm").serialize(); // #frm 안에 있는 내용을 갖고 오는 함수
 		
 		$.ajax({
 			/* 전송 전 세팅 */
 			type:"POST",
 			data:formData,
-			url:"boardWriteSave.do",
+			url:"boardModifySave.do",
 			dataType:"text",
 			
 			/* 전송 후 세팅 */
-			success: function(data){
-				if(data == "ok"){
+			success: function(result){
+				if(result == "1"){
 					alert("저장완료");
-					location.replace('/boardList.do');
+					location="boardList.do";
 				} else{
 					alert("저장실패");
 					return false;
@@ -92,38 +66,39 @@ th,td{
 			}
 		});
 	};
-	function fn_cancel(){
-		location.replace('/boardList.do');
+	function up_cancel(){
+		location.replace('/boardDetail.do?unq=1');
 	}
 	
 	</script>
 
 <body>
-	<form name="frm" id="frm" method="post" action="">
-		<caption>게시판 등록</caption>
+<form name="ufrm" id="ufrm" method="post" action="">
+		<caption>게시판 수정</caption>
+		<input type="hidden" name="unq" value="${BoardVO.unq}">
 		<table>
 			<tr>
-			<!-- laber for 뒤에는 name을 기입하면 label을 클릭했을 때 자동으로 커서 이동시켜줌 -->
+			<!-- label for 뒤에는 name을 기입하면 label을 클릭했을 때 자동으로 커서 이동시켜줌 -->
 				<th width="20%"><label for="title">제목</label></th>
-				<td width="80%"><input type="text" name="title" id="title" class="input1"></td>
+				<td width="80%"><input value="${BoardVO.title}" type="text" name="title" id="title" class="input1"></td>
 			</tr>
 			<tr>
 				<th><label for="pass">암호</label></th>
-				<td><input type="password" name="pass" id="pass"></td>
+				<td><input value="${BoardVO.pass}" type="password" name="pass" id="pass"></td>
 			</tr>
 			<tr>
 				<th><label for="name">글쓴이</label></th>
-				<td><input type="text" name="name" id="name"></td>
+				<td><input  value="${BoardVO.name}" type="text" name="name" id="name"></td>
 			</tr>
 			<tr>
 				<th><label for="content">내용</label></th>
-				<td><textarea name="content" id="content" class="input1"></textarea></td>
+				<td><textarea name="content" id="content" class="input1">${BoardVO.content}</textarea></td>
 			</tr>
 			<tr>
 				<th colspan="2">
 				<!-- <button type="submit" onclick="fn_submit();return false;">저장</button> -->
-				<button type="submit" onclick="fn_submit();">저장</button>
-				<button type="reset" onclick="fn_cancel();">취소</button>
+				<button type="submit" onclick="up_submit();">저장</button>
+				<button type="reset" onclick="up_cancel();">취소</button>
 				</th>
 			</tr>
 		</table>

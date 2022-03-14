@@ -24,16 +24,13 @@
 		</tr>
 		<c:set var="cnt" value="1" />
 		<c:forEach var="result" items="${resultList }">
-			<form action="boardDetail.do" method="post">
 				<tr>
 					<td><c:out value="${cnt }" /></td>
-					<td><c:out value="${result.title }" /></td>
+					<td><a href="/boardDetail.do?unq=${result.unq }"><c:out value="${result.title }" /></a></td>
 					<td><c:out value="${result.name }" /></td>
 					<td><c:out value="${result.rdate }" /></td>
 					<td><c:out value="${result.hits }" /></td>
 				</tr>
-				<button type="submit">보기</button>
-			</form>
 			<c:set var="cnt" value="${cnt+1}"/>
 		</c:forEach>
 	

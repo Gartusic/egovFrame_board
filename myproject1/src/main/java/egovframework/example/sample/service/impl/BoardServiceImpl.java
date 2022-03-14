@@ -29,13 +29,23 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void deleteNBoard(BoardVO vo) throws Exception {
-		boardDAO.deleteNBoard(vo);
+	public int deleteBoard(BoardVO vo) throws Exception {
+		return boardDAO.deleteBoard(vo);
 	}
 
 	@Override
-	public String selectNBoardDetail(BoardVO vo) throws Exception {
-		return boardDAO.selectNBoardDetail(vo);
+	public BoardVO selectNBoardDetail(int unq) throws Exception {
+		return boardDAO.selectNBoardDetail(unq);
+	}
+	
+	@Override
+	public int updateNBoard(BoardVO vo) throws Exception {
+		return boardDAO.updateNBoard(vo);
+	}
+
+	@Override
+	public int selectNBoardPass(BoardVO vo) throws Exception {
+		return boardDAO.selectNBoardPass(vo);
 	}
 
 }

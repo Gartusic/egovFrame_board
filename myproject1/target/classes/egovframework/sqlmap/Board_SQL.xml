@@ -47,7 +47,7 @@
 				UNQ DESC
 	</select>
 	
-	<select id="boardDAO.selectNBoardDetail">
+	<select id="boardDAO.selectNBoardDetail" resultClass="boardVO">
 		SELECT  UNQ,
 				TITLE,
 				PASS,
@@ -67,4 +67,21 @@
 		FROM NBOARD
 		WHERE UNQ = #unq#
 	</delete>
+	
+	<update id="boardDAO.updateNBoard">
+		UPDATE nboard
+		SET		
+			TITLE = #title#,
+			NAME = #name#,
+			CONTENT = #content#
+		WHERE 
+			unq = #unq#;
+	</update>
+	
+	<select id="boardDAO.selectNBoardPass" resultClass="java.lang.Integer">
+			SELECT COUNT(*) FROM NBOARD
+				WHERE UNQ = #unq# AND PASS=#pass#
+	</select>
+	
+	
 </sqlMap>
