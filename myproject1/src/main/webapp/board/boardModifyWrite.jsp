@@ -3,77 +3,10 @@
     <%@ taglib prefix="c"      uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>글 수정</title>
-</head>
-
-<script>
-/* trim() : 공백제거 */
-	function up_submit(){
-		if($.trim($("#title").val()) == ""){
-			alert("제목을 입력해주세요. ");
-			$("#title").focus(); // 커서를 집중시킴
-			return false;
-		}
-		
- 		$("#title").val($.trim($("#title").val()) );
-		
-		if($.trim($("#pass").val()) == ""){
-			alert("암호를 입력해주세요. ");
-			$("#pass").focus();
-			return false;
-		}
-		$("#pass").val($.trim($("#pass").val()) );
-		
-/* 		if(document.frm.title.value == ""){
-			alert("제목을 입력해주세요!");
-			document.frm.title.focus();
-			return false;
-		}
-		
-		if(document.frm.pass.value == ""){
-			alert("암호를 입력해주세요!");
-			document.frm.pass.focus();
-			return false;
-		} */
-		//document.frm.submit(); // '동기' 전송방식
-
-	
-
-	/* 비동기 전송방식 */
-		var formData = $("#ufrm").serialize(); // #frm 안에 있는 내용을 갖고 오는 함수
-		
-		$.ajax({
-			/* 전송 전 세팅 */
-			type:"POST",
-			data:formData,
-			url:"boardModifySave.do",
-			dataType:"text",
-			
-			/* 전송 후 세팅 */
-			success: function(result){
-				if(result == "1"){
-					alert("저장완료");
-					location="boardList.do";
-				} else{
-					alert("저장실패");
-					return false;
-				}
-			},
-			error: function(){
-				alert("오류발생");
-			}
-		});
-	};
-	function up_cancel(){
-		location.replace('/boardDetail.do?unq=1');
-	}
-	
-	</script>
+<%@ include file="/header.jsp" %>
 
 <body>
-<form name="ufrm" id="ufrm" method="post" action="">
+<form name="ufrm" id="ufrm" method="post" action="boardModifySave.do">
 		<caption>게시판 수정</caption>
 		<input type="hidden" name="unq" value="${BoardVO.unq}">
 		<table>
@@ -97,8 +30,8 @@
 			<tr>
 				<th colspan="2">
 				<!-- <button type="submit" onclick="fn_submit();return false;">저장</button> -->
-				<button type="submit" onclick="up_submit();">저장</button>
-				<button type="reset" onclick="up_cancel();">취소</button>
+				<button type="submit" onclick="up_submit()">저장</button>
+				<button type="reset" onclick="up_cancel()">취소</button>
 				</th>
 			</tr>
 		</table>

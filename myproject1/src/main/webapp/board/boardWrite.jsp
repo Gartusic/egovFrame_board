@@ -2,37 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<script
-  src="https://code.jquery.com/jquery-1.12.4.js"
-  integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
-  crossorigin="anonymous"></script>
-  <script
-  src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
-  integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
-  crossorigin="anonymous"></script>
-</head>
-
-<style>
-body{
-	font-size:9px;
-}
-button{
-	font-size:9px;
-}
-table{
-	width:600px;
-	border-collapse:collapse;
-}
-th,td{
-	border:1px solid #cccccc;
-}
-.input1{
-	width:98%;
-}
-</style>
+<%@ include file="/header.jsp" %>
 
 <script>
 /* trim() : 공백제거 */
@@ -99,7 +69,7 @@ th,td{
 	</script>
 
 <body>
-	<form name="frm" id="frm" method="post" action="">
+	<form name="frm" id="frm" method="post">
 		<caption>게시판 등록</caption>
 		<table>
 			<tr>
@@ -121,7 +91,6 @@ th,td{
 			</tr>
 			<tr>
 				<th colspan="2">
-				<!-- <button type="submit" onclick="fn_submit();return false;">저장</button> -->
 				<button type="submit" onclick="fn_submit();">저장</button>
 				<button type="reset" onclick="fn_cancel();">취소</button>
 				</th>

@@ -61,35 +61,40 @@ public class BoardController {
 		System.out.println("unq:" + vo.getUnq());
 		return "board/boardDetail";
 	}
-	
-	
-//	비밀번호 확인
-	@RequestMapping("/passWrite.do")
-	public String selectNBoardPass(int unq, ModelMap model) {
-		model.addAttribute("unq", unq);
-		return "board/passWrite";
-	}
+//	
+//	
+////	비밀번호 확인
+//	@RequestMapping("/passWrite.do")
+//	public String selectNBoardPass(int unq, ModelMap model) {
+//		model.addAttribute("unq", unq);
+//		return "board/passWrite";
+//	}
+//	
+////	게시글 삭제
+//	@RequestMapping("/boardDelete.do")
+//	@ResponseBody // 자바 객체 <-> http응답 바디로 변환하는 역할
+//	public String deleteBoard(BoardVO vo) throws Exception {
+//		
+////		암호일치검사 1= true, 0 = false
+//		
+//		int result = 0;
+//		int count = boardService.selectNBoardPass(vo);
+//		if(count == 1) {
+//			result = boardService.deleteBoard(vo);
+//		} else if(count ==0) {
+//			result = -1;
+//		}
+//
+//		return result+"";
+//	}
 	
 //	게시글 삭제
 	@RequestMapping("/boardDelete.do")
-	@ResponseBody // 자바 객체 <-> http응답 바디로 변환하는 역할
-	public String deleteBoard(BoardVO vo) throws Exception {
+	public String deleteBoard(int unq) throws Exception {
 		
-//		암호일치검사 1= true, 0 = false
-		
-		int result = 0;
-		int count = boardService.selectNBoardPass(vo);
-		if(count == 1) {
-			result = boardService.deleteBoard(vo);
-		} else if(count ==0) {
-			result = -1;
-		}
-
-		return result+"";
+		boardService.deleteBoard(unq);
+		return "redirect:/boardList.do";
 	}
-	
-	
-	
 	
 //	수정화면으로 이동
 	@RequestMapping("boardModifyWrite.do")
@@ -99,14 +104,13 @@ public class BoardController {
 		model.addAttribute("BoardVO", boardVO);
 		return "board/boardModifyWrite";
 	}
+	
 //	글 수정
 	@RequestMapping("boardModifySave.do")
-	@ResponseBody //비동기 연결방식
 	public String updateNBoardModify(BoardVO vo) throws Exception{
-		int result = boardService.updateNBoard(vo);
+		boardService.updateNBoard(vo);
 		
-		
-		return result+"";
+		return "redirect:/boardList.do";
 	}
 	
 }

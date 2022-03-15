@@ -23,8 +23,8 @@ public class BoardDAO extends EgovAbstractDAO{
 	}
 	
 //	게시글 삭제
-	public int deleteBoard(BoardVO vo) {
-		return delete("boardDAO.deleteNBoard", vo);
+	public void deleteBoard(int unq) {
+		delete("boardDAO.deleteNBoard", unq);
 	}
 //	게시글 상세화면
 	public BoardVO selectNBoardDetail(int unq) {
