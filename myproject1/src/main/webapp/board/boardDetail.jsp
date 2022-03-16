@@ -61,14 +61,12 @@
 			</tr>
 			<tr>
 				<th><label for="content">내용</label></th>
-				<td height="50">${boardDetail.content}
-					<input type="hidden" name="unq" value="${boardDetail.unq}">
-				</td>
+				<td height="50">${boardDetail.content}</td>
 			</tr>
 			<tr>
 				<th colspan="2">
 				<button type="button" onclick="location='boardModifyWrite.do?unq=${boardDetail.unq}'">수정</button>
-				<button type="submit" action="boardDelete.do">삭제</button>
+				<button type="button"><a href="boardDelete.do?unq=${boardDetail.unq}">삭제</a></button>
 				</th>
 			</tr>
 		</table>

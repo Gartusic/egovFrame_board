@@ -2,13 +2,13 @@ package egovframework.example.sample.service;
 
 public class BoardVO {
 	//캡슐화 : 접근지정자
-	private int unq;
-	private String title;
-	private String pass; // 보안 문제때문에 프라이빗으로 하는 거 뿐?
-	public String name;
-	public  String content;
-	public int hits;
-	public String rdate;
+	private int unq; // 글번호
+	private String title; //제목
+	private String pass; // 암호. 보안 문제때문에 프라이빗으로 하는 거 뿐?
+	public String name; //이름
+	public  String content; //내용
+	public int hits; //조회수
+	public String rdate; //날짜
 	
 	
 	public int getUnq() {

@@ -14,7 +14,7 @@ public interface BoardService {
 	public int selectNBoardPass(BoardVO vo) throws Exception;
 	
 //	게시글 삭제
-	public void deleteBoard(int unq) throws Exception;
+	public void deleteBoard(BoardVO vo) throws Exception;
 
 //	상세화면
 	public BoardVO selectNBoardDetail(int unq) throws Exception;

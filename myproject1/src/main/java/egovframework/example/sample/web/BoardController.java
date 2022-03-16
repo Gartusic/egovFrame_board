@@ -90,9 +90,9 @@ public class BoardController {
 	
 //	게시글 삭제
 	@RequestMapping("/boardDelete.do")
-	public String deleteBoard(int unq) throws Exception {
+	public String deleteBoard(BoardVO vo) throws Exception {
 		
-		boardService.deleteBoard(unq);
+		boardService.deleteBoard(vo);
 		return "redirect:/boardList.do";
 	}
 	
