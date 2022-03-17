@@ -5,9 +5,9 @@
 <html>
 <%@ include file="/header.jsp" %>
 
-<body>
+
 <form name="ufrm" id="ufrm" method="post" action="boardModifySave.do">
-		<caption>게시판 수정</caption>
+		<h3>게시판 수정</h3>
 		<input type="hidden" name="unq" value="${BoardVO.unq}">
 		<table>
 			<tr>
@@ -17,7 +17,7 @@
 			</tr>
 			<tr>
 				<th><label for="pass">암호</label></th>
-				<td><input value="${BoardVO.pass}" type="password" name="pass" id="pass"></td>
+				<td><input value="" type="password" name="pass" id="pass"></td>
 			</tr>
 			<tr>
 				<th><label for="name">글쓴이</label></th>
@@ -31,7 +31,7 @@
 				<th colspan="2">
 				<!-- <button type="submit" onclick="fn_submit();return false;">저장</button> -->
 				<button type="submit" onclick="up_submit()">저장</button>
-				<button type="reset" onclick="up_cancel()">취소</button>
+				<button type="reset" onclick="location='boardList.do'">취소</button>
 				</th>
 			</tr>
 		</table>

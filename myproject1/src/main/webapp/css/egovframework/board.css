@@ -1,0 +1,103 @@
+@charset "UTF-8";
+
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-size: 15px;
+    font-family: 'Nanum Myeongjo', serif;
+    line-height: 20px;
+    color:#333;
+    font-weight: 300;
+    background-color: rgb(252, 244, 244);
+    min-width: 320px;
+    width: 100%;
+    height: auto;
+    padding-top: 55px;
+}
+h1{
+    margin: 50px auto;
+    padding-left: 50px;
+}
+h3{
+    color:#777;
+    font-weight: 300;
+}
+h1 a{
+    margin: 10px auto;
+    font-size: 45px;
+}
+ul, ol{
+    list-style: none;
+}
+button{
+	font-size:15px;
+    font-family: 'Nanum Myeongjo', serif;
+    padding: 10px 15px 10px 15px;
+    background-color: rgb(255, 227, 227);
+    border-radius: 10px;
+    margin: 10px auto;
+    border: 1px #777;
+}
+input, textarea{
+    font-family: 'Nanum Myeongjo', serif;
+}
+button:hover{
+    background-color: rgb(247, 185, 185);
+}
+table{
+	width:780px;
+	border-collapse:collapse;
+    padding: 10px 20px 10px 20px;
+    margin: 10px auto;
+    line-height: 30px;
+    background-color: rgb(241, 245, 248);
+}
+th,td{
+	border:1px solid #cccccc;
+    padding-left: 10px;
+}
+th:hover,td:hover{
+    background-color: rgb(222, 241, 252);
+}
+
+a{
+    text-decoration: none;
+    font-size: 15px;
+    color: rgb(90, 76, 76);
+}
+
+
+.input1{
+	width:98%;
+}
+.box1{
+    display: flex;
+    justify-content: space-between;
+    width:600px;
+    margin: 0 auto;
+}
+
+
+
+
+@media screen and (min-width:768px) {
+    .ta{
+        display: block;
+    }
+}
+
+@media screen and (min-width:1200px) {
+    #wrap{
+        width: 1200px;
+        margin: 0 auto;
+        padding-top: 100px;
+    }
+    .mo{
+        display: none;
+    }
+    .pc{
+        display: block;
+    }
+}

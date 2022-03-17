@@ -4,8 +4,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <%@ include file="/header.jsp" %>
-<body>
-	<h1><a href="/">HOME</a></h1>
 	<table>
 		<tr align="center">
 			<th width="15%">번호</th>
@@ -25,12 +23,13 @@
 				</tr>
 			<c:set var="cnt" value="${cnt+1}"/>
 		</c:forEach>
-	
+		<tr>
+			<th colspan="5">
+				<form action="boardWrite.do" method="get">
+					<button type="submit">글쓰기</button>
+				</form>
+			</th>
+		</tr>
 	</table>
-	<div>
-		<form action="boardWrite.do" method="get">
-			<button type="submit">글쓰기</button>
-		</form>
-	</div>
 </body>
 </html>
