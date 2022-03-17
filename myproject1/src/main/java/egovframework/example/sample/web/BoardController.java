@@ -1,19 +1,19 @@
 package egovframework.example.sample.web;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import egovframework.example.sample.service.BoardService;
 import egovframework.example.sample.service.BoardVO;
+
 @Controller
 public class BoardController {
 	
@@ -90,10 +90,20 @@ public class BoardController {
 	
 //	게시글 삭제
 	@RequestMapping("/boardDelete.do")
-	public String deleteBoard(BoardVO vo) throws Exception {
-		
-		boardService.deleteBoard(vo);
-		return "redirect:/boardList.do";
+	@ResponseBody
+	public void deleteBoard(HttpServletResponse response,String unq, String userpass,String pass) throws Exception {
+		response.setContentType("text/html; charset=euc-kr");
+		PrintWriter out = response.getWriter();
+/*		System.out.println(userpass+","+ pass);*/
+		if(userpass.equals(pass)) {
+			int key = Integer.parseInt(unq);
+			boardService.deleteBoard(key);
+			out.println("<script>alert('삭제했습니다.'); location.replace('/boardList.do');</script>");
+			out.flush();
+		} else {
+			out.println("<script>alert('비밀번호가 틀렸습니다.'); location.replace('/boardList.do'); </script>");
+			out.flush();
+		}
 	}
 	
 //	수정화면으로 이동
@@ -107,10 +117,21 @@ public class BoardController {
 	
 //	글 수정
 	@RequestMapping("boardModifySave.do")
-	public String updateNBoardModify(BoardVO vo) throws Exception{
-		boardService.updateNBoard(vo);
-		
-		return "redirect:/boardList.do";
+	@ResponseBody
+	public void updateNBoardModify(HttpServletResponse response,BoardVO vo, String userpass,String pass) throws Exception{
+		response.setContentType("text/html; charset=euc-kr");
+		PrintWriter out = response.getWriter();
+/*		System.out.println(userpass+","+ pass);*/
+		if(userpass.equals(pass)) {
+			boardService.updateNBoard(vo);
+			out.println("<script>alert('수정 성공!'); location.replace('/boardList.do'); </script>");
+			out.flush();
+		} else {
+			out.println("<script>alert('비밀번호가 틀렸습니다.'); location.replace('/boardList.do'); </script>");
+			out.flush();
+		}
+
+
 	}
 	
 }

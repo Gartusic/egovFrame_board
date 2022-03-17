@@ -14,7 +14,7 @@
 <html>
 <%@ include file="/header.jsp" %>
 
- 	<form name="dfrm" id="dfrm" method="post" action="">
+ 	<form name="dfrm" id="dfrm" method="post" action="boardDelete.do">
 		<div class="box1">
 			<h3>게시판 상세화면</h3>
 			<p><a href="/boardList.do">
@@ -42,9 +42,12 @@
 				<td height="50">${boardDetail.content}</td>
 			</tr>
 			<tr>
-				<th colspan="2">
+				<th colspan="3">
 				<button type="button" onclick="location='boardModifyWrite.do?unq=${boardDetail.unq}'">수정</button>
-				<button type="button"><a href="boardDelete.do?unq=${boardDetail.unq}">삭제</a></button>
+				<button type="submit">삭제</button>
+				<input type="hidden" name="unq" id="unq" value="${boardDetail.unq}">
+				<input type="hidden" name="pass" id="pass" value="${boardDetail.pass}">
+				<p>암호: <input value="" type="password" name="userpass" id="userpass"></p>
 				</th>
 			</tr>
 		</table>

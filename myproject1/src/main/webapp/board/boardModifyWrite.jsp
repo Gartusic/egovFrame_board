@@ -17,7 +17,8 @@
 			</tr>
 			<tr>
 				<th><label for="pass">암호</label></th>
-				<td><input value="" type="password" name="pass" id="pass"></td>
+				<td><input value="" type="password" name="userpass" id="userpass"></td> <!-- 유저가 입력할 암호 -->
+				<td><input value="${BoardVO.pass }" type="hidden" name="pass" id="pass"></td> <!-- 현재 암호 -->
 			</tr>
 			<tr>
 				<th><label for="name">글쓴이</label></th>
@@ -30,8 +31,8 @@
 			<tr>
 				<th colspan="2">
 				<!-- <button type="submit" onclick="fn_submit();return false;">저장</button> -->
-				<button type="submit" onclick="up_submit()">저장</button>
-				<button type="reset" onclick="location='boardList.do'">취소</button>
+				<button type="submit">저장</button>
+				<button type="reset" onclick="location='boardDetail.do?unq=${BoardVO.unq}'">취소</button>
 				</th>
 			</tr>
 		</table>
