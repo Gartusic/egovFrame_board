@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import egovframework.example.sample.service.BoardVO;
+import egovframework.example.sample.service.PagingVO;
 import egovframework.rte.psl.dataaccess.EgovAbstractDAO;
 
 //sql과 연결되는 메소드들 = mapper.java = DAO
@@ -35,11 +36,22 @@ public class BoardDAO extends EgovAbstractDAO{
 	public int updateNBoard(BoardVO vo) {
 		return update("boardDAO.updateNBoard", vo);
 	}
-
-	public int selectNBoardPass(BoardVO vo) {
-		return delete("boardDAO.deleteNBoard", vo);
+//	조회수 증가
+	public void updateHits(BoardVO vo) {
+		update("boardDAO.updateHits", vo);
 	}
 
+
+//	페이징
+	// 게시물 총 갯수
+	public int countBoard() {
+		return (int) select("boardDAO.countNBoard");
+	};
+
+	// 페이징 처리 게시글 조회
+	public List<?> selectPage(PagingVO vo){
+		return list("boardDAO.selectPage", vo);
+	};
 	
 	
 }

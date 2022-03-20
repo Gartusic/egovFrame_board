@@ -5,6 +5,7 @@
 
 	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/> <!--  <- 이부분은 항상 고정이다. -->
 	<typeAlias  alias="boardVO" type="egovframework.example.sample.service.BoardVO"/>
+	<typeAlias  alias="pagingVO" type="egovframework.example.sample.service.PagingVO"/>
 
 <!-- 여기에서 ibatis를 이용한 쿼리문 처리를 할 수 있다. 
 	경로 설정은 sql-map-config.xml에서 처리한다.  -->
@@ -47,6 +48,7 @@
 				UNQ DESC
 	</select>
 	
+	
 	<select id="boardDAO.selectNBoardDetail" resultClass="boardVO">
 		SELECT  UNQ,
 				TITLE,
@@ -75,12 +77,36 @@
 			NAME = #name#,
 			CONTENT = #content#
 		WHERE 
-			unq = #unq#;
+			unq = #unq#
 	</update>
 	
-	<select id="boardDAO.selectNBoardPass" resultClass="java.lang.Integer">
-			SELECT COUNT(*) FROM NBOARD
-				WHERE UNQ = #unq# AND PASS=#pass#
+	<!-- 조회수 증가 -->
+	<update id="boardDAO.updateHits">
+		UPDATE NBOARD
+		SET    HITS = HITS +1
+		WHERE UNQ = #unq#
+	</update>
+	
+	
+	<!-- 페이징 -->
+	
+	<!-- 총 게시글 갯수 출력 -->
+	<select id="boardDAO.countNBoard" resultClass="Integer">
+		SELECT COUNT(*) FROM NBOARD
+	</select>
+	
+	<!-- 페이징 처리 후 게시글 조회 -->
+	<select id="boardDAO.selectPage" resultClass="boardVO">
+		SELECT * 
+			FROM (
+				SELECT ROWNUM RN, A.* 
+					FROM (
+							SELECT * 
+							FROM NBOARD 
+							ORDER BY UNQ DESC 
+							) A
+					)
+		WHERE RN BETWEEN #start# AND #end#
 	</select>
 	
 	

@@ -6,7 +6,9 @@
 
 <body>
 	<form name="frm" id="frm" method="post">
-		<h3>게시판 등록</h3>
+		<div class="box1">
+			<h3>게시판 등록</h3>
+		</div>
 		<table>
 			<tr>
 			<!-- laber for 뒤에는 name을 기입하면 label을 클릭했을 때 자동으로 커서 이동시켜줌 -->

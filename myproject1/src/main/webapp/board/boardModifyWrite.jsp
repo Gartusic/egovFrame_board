@@ -7,7 +7,9 @@
 
 
 <form name="ufrm" id="ufrm" method="post" action="boardModifySave.do">
-		<h3>게시판 수정</h3>
+		<div class="box1">
+			<h3>게시판 수정</h3>
+		</div>
 		<input type="hidden" name="unq" value="${BoardVO.unq}">
 		<table>
 			<tr>

@@ -7,12 +7,16 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import egovframework.example.sample.service.BoardService;
 import egovframework.example.sample.service.BoardVO;
+import egovframework.example.sample.service.PagingVO;
 
 @Controller
 public class BoardController {
@@ -49,10 +53,39 @@ public class BoardController {
 		return "board/boardList";
 	}
 	
+	
+//	페이징 리스트
+	@GetMapping("boardListPaging.do")
+	public String boardList(PagingVO vo, Model model
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) throws Exception {
+		
+		int total = boardService.countBoard();
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		System.out.println("total: "+total+", vo:"+ vo);
+		vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		model.addAttribute("paging", vo); // 페이징
+		System.out.println("board test----------");
+		System.out.println(boardService.selectPage(vo));
+		System.out.println("board test----------");
+		model.addAttribute("viewAll", boardService.selectPage(vo)); // 총 게시물 수
+		return "board/boardPaging";
+	}
+	
+	
 //	게시글 상세화면
 	@RequestMapping("/boardDetail.do")
 	public String selectNBoardDetail(BoardVO vo, ModelMap model) throws Exception{
 		BoardVO boardVO = boardService.selectNBoardDetail(vo.getUnq());
+		
+		boardService.updateHits(boardVO);
 		
 		String content = boardVO.getContent(); // \n
 		boardVO.setContent(content.replace("\n", "<br>")); // 줄바꿈 되게 하는 코드

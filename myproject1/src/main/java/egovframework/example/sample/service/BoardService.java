@@ -10,9 +10,6 @@ public interface BoardService {
 //	화면 목록
 	public List<?> selectNBoardList(BoardVO vo) throws Exception;
 	
-//	비밀번호 확인
-	public int selectNBoardPass(BoardVO vo) throws Exception;
-	
 //	게시글 삭제
 	public void deleteBoard(int unq) throws Exception;
 
@@ -22,5 +19,16 @@ public interface BoardService {
 //	게시글 수정
 	public int updateNBoard(BoardVO vo) throws Exception;
 
+//	조회수 증가
+	public void updateHits(BoardVO vo) throws Exception;
+	
+	
+//	페이징
+	// 게시물 총 갯수
+	public int countBoard() throws Exception;
+	
+	// 페이징 처리 게시글 조회
+	public List<?> selectPage(PagingVO vo) throws Exception;
+	
 	
 }

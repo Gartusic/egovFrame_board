@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import egovframework.example.sample.service.BoardService;
 import egovframework.example.sample.service.BoardVO;
+import egovframework.example.sample.service.PagingVO;
 
 
 //컨트롤러와 연결되는 설정
@@ -42,10 +43,28 @@ public class BoardServiceImpl implements BoardService{
 	public int updateNBoard(BoardVO vo) throws Exception {
 		return boardDAO.updateNBoard(vo);
 	}
+	
+	
+	
+
+	
+//	페이징
+	@Override
+	public int countBoard() throws Exception {
+		return boardDAO.countBoard();
+	}
 
 	@Override
-	public int selectNBoardPass(BoardVO vo) throws Exception {
-		return boardDAO.selectNBoardPass(vo);
+	public List<?> selectPage(PagingVO vo) throws Exception {
+		return boardDAO.selectPage(vo);
 	}
+
+	@Override
+	public void updateHits(BoardVO vo) throws Exception {
+		boardDAO.updateHits(vo);
+		
+	}
+
+
 
 }
