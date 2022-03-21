@@ -131,10 +131,10 @@ public class BoardController {
 		if(userpass.equals(pass)) {
 			int key = Integer.parseInt(unq);
 			boardService.deleteBoard(key);
-			out.println("<script>alert('삭제했습니다.'); location.replace('/boardList.do');</script>");
+			out.println("<script>alert('삭제했습니다.'); location.replace('/boardListPaging.do');</script>");
 			out.flush();
 		} else {
-			out.println("<script>alert('비밀번호가 틀렸습니다.'); location.replace('/boardList.do'); </script>");
+			out.println("<script>alert('비밀번호가 틀렸습니다.'); location.replace('/boardListPaging.do'); </script>");
 			out.flush();
 		}
 	}
@@ -157,10 +157,10 @@ public class BoardController {
 /*		System.out.println(userpass+","+ pass);*/
 		if(userpass.equals(pass)) {
 			boardService.updateNBoard(vo);
-			out.println("<script>alert('수정 성공!'); location.replace('/boardList.do'); </script>");
+			out.println("<script>alert('수정 성공!'); location.replace('/boardListPaging.do'); </script>");
 			out.flush();
 		} else {
-			out.println("<script>alert('비밀번호가 틀렸습니다.'); location.replace('/boardList.do'); </script>");
+			out.println("<script>alert('비밀번호가 틀렸습니다.'); location.replace('/boardListPaging.do'); </script>");
 			out.flush();
 		}
 

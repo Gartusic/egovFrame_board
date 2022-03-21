@@ -20,10 +20,31 @@
 				   )
 		]]>
 	</insert>
-
-
-
-
+	
+	<!-- 댓글 조회 -->
+	<select id="replyDAO.selectNreply" resultClass="egovMap">
+		<![CDATA[
+			SELECT * FROM
+			N_REPLY
+			WHERE ROWNUM < 10 ORDER BY UNQ DESC
+		]]>
+	</select>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="replyDAO.deleteNreply">
+		<![CDATA[
+			DELETE FROM 
+			N_REPLY
+			WHERE R_UNQ = #r_unq#
+		]]>
+	</delete>
+	<!-- 댓글 수정 -->
+	<update id="replyDAO.updateNreply">
+		UPDATE 	N_REPLY
+		SET		REPLY = #reply#,
+				UPDATEDATE = SYSDATE
+		WHERE	R_UNQ = #r_unq#
+	</update>
 
 
 

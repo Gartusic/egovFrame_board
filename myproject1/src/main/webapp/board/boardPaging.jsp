@@ -4,8 +4,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <%@ include file="/header.jsp" %>
-
-	<div style="float: right;">
+	<div class="box1">
+			<h3>게시판 목록 </h3>
 			<select id="cntPerPage" name="sel" onchange="selChange()">
 				<option value="5"
 					<c:if test="${paging.cntPerPage == 5}">selected</c:if>>5줄 보기</option>
@@ -16,8 +16,7 @@
 				<option value="20"
 					<c:if test="${paging.cntPerPage == 20}">selected</c:if>>20줄 보기</option>
 			</select>
-		</div> <!-- 옵션선택 끝 -->
-
+	</div><!-- 옵션선택 끝 -->
 	<table>
 		<tr align="center">
 			<th width="15%">번호</th>

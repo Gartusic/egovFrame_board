@@ -36,7 +36,7 @@
 			success: function(data){
 				if(data == "ok"){
 					alert("삭제완료");
-					location.replace('/boardList.do');
+					location.replace('/boardListPaging.do');
 				} else{
 					alert("삭제실패");
 					return false;
@@ -46,7 +46,7 @@
 				alert("오류발생");
 			}
 		});
-		location.replace('/boardList.do');
+		location.replace('/boardListPaging.do');
 	}
 	
 	
@@ -98,7 +98,7 @@
 			success: function(data){
 				if(data == "ok"){
 					alert("저장완료");
-					location.replace('/boardList.do');
+					location.replace('/boardListPaging.do');
 				} else{
 					alert("저장실패");
 					return false;
@@ -110,11 +110,15 @@
 		});
 	};
 	function fn_cancel(){
-		location.replace('/boardList.do');
+		location.replace('/boardListPaging.do');
 	}
 	
 	
-	
+	/* 페이징 - 게시할 줄 갯수 바꾸기 */
+	function selChange() {
+		var sel = document.getElementById('cntPerPage').value;
+		location.href="boardListPaging.do?nowPage=${paging.nowPage}&cntPerPage="+sel;
+	}
 	
 	
 	
@@ -124,4 +128,4 @@
 	</script>
 
 <body>
-	<h1><a href="/boardList.do">HOME</a></h1>
+	<h1><a href="/boardListPaging.do">HOME</a></h1>
